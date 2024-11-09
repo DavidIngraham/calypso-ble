@@ -1,0 +1,15 @@
+{
+    "idf.port": "/dev/ttyACM0",
+    "idf.adapterTargetName": "esp32c6",
+    "idf.openOcdConfigs": [
+        "board/esp32c6-builtin.cfg"
+    ],
+    "idf.flashType": "UART",
+    "files.associations": {
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "span": "c",
+        "esp_bt.h": "c"
+    }
+}

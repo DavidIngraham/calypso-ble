@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/david/repos/calypso-ble/build/CMakeFiles/bootloader
+/home/david/repos/calypso-ble/build/CMakeFiles/bootloader.rule
+/home/david/repos/calypso-ble/build/CMakeFiles/bootloader-complete.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/david/repos/calypso-ble/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
