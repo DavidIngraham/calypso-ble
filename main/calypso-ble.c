@@ -41,6 +41,8 @@
 #define CALYPSO_APP_ID 0
 #define INVALID_HANDLE   0
 
+#define UART_BAUD_RATE 115200
+
 static const char remote_device_name[] = "ULTRASONIC";
 static bool connect    = false;
 static bool get_server = false;
@@ -51,7 +53,7 @@ static esp_gattc_descr_elem_t *descr_elem_result = NULL;
 static void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param);
 static void esp_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if, esp_ble_gattc_cb_param_t *param);
 static void calypso_profile_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if, esp_ble_gattc_cb_param_t *param);
-
+static void init_uart();
 
 static esp_bt_uuid_t remote_filter_service_uuid = {
     .len = ESP_UUID_LEN_16,
@@ -110,7 +112,7 @@ static void handle_wind_data(uint8_t wind_data[10])
 static void init_uart()
 {
     uart_config_t uart_config = {
-        .baud_rate = ECHO_UART_BAUD_RATE,
+        .baud_rate = UART_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
         .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
