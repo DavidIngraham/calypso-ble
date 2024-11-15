@@ -1,0 +1,13 @@
+dependencies:
+  cmake_utilities:
+    version: 0.*
+  idf:
+    version: '>=4.3'
+description: A common layer to manage the BLE connection, support both Bluedroid and
+  Nimble
+repository: git://github.com/espressif/esp-iot-solution.git
+repository_info:
+  commit_sha: c0550db6e570aeae6c0e1d82afee4e99eacb3fc8
+  path: components/bluetooth/ble_conn_mgr
+url: https://github.com/espressif/esp-iot-solution/tree/master/components/bluetooth/ble_conn_mgr
+version: 0.1.2

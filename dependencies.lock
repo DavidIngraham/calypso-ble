@@ -1,0 +1,37 @@
+dependencies:
+  espressif/ble_conn_mgr:
+    component_hash: fa0e88eef06bf3135f333fea5e752411d47e379da7f2659520b7036573a79b7f
+    dependencies:
+    - name: idf
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=4.3'
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: 0.*
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.1.2
+  espressif/cmake_utilities:
+    component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
+    dependencies:
+    - name: idf
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=4.1'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.5.3
+  idf:
+    source:
+      type: idf
+    version: 5.3.1
+direct_dependencies:
+- espressif/ble_conn_mgr
+- idf
+manifest_hash: 25975725e5bdab95d6d0a8731a2ad4741b58af8f13d4ed97a1c8fa5b9a6af005
+target: esp32c6
+version: 2.0.0

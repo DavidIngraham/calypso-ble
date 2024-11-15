@@ -10,6 +10,7 @@
         "string": "c",
         "string_view": "c",
         "span": "c",
-        "esp_bt.h": "c"
+        "esp_bt.h": "c",
+        "freertos.h": "c"
     }
 }
