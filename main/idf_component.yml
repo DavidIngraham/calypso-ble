@@ -1,6 +1,5 @@
 ## IDF Component Manager Manifest File
 dependencies:
-  espressif/ble_conn_mgr: "^0.1.2"
   ## Required IDF version
   idf:
     version: ">=4.1.0"
