@@ -11,6 +11,23 @@
         "string_view": "c",
         "span": "c",
         "esp_bt.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "ble_hs.h": "c",
+        "ble_svc_gap.h": "c",
+        "task.h": "c",
+        "nimble_port.h": "c",
+        "ble_gap.h": "c",
+        "blecent_gap.h": "c",
+        "nimble_port_freertos.h": "c",
+        "charconv": "c",
+        "chrono": "c",
+        "optional": "c",
+        "format": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }
