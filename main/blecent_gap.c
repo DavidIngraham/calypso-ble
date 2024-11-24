@@ -27,7 +27,8 @@ static void blecent_on_disc_complete(const struct peer *peer, int status, void *
 static int blecent_should_connect(const struct ble_gap_disc_desc *disc);
 static int blecent_gap_event(struct ble_gap_event *event, void *arg);
 static void blecent_on_disc_complete(const struct peer *peer, int status, void *arg);
-static int blecent_subscribe(const struct peer *peer);
+static int blecent_subscribe_all(const struct peer *peer);
+static int blecent_subscribe_uuid16(const struct peer *peer, uint16_t svc_uuid, uint16_t chr_uuid);
 
 /**
  * The nimble host executes this callback when a GAP event occurs.  The
@@ -171,7 +172,7 @@ static void blecent_on_disc_complete(const struct peer *peer, int status, void *
      * write, and subscribe to notifications depending upon user input.
      */
     //blecent_read_write_subscribe(peer);
-    blecent_subscribe(peer);
+    blecent_subscribe_all(peer);
 }
 
 
@@ -201,19 +202,6 @@ static int blecent_should_connect(const struct ble_gap_disc_desc *disc)
         }
     }
     
-    /*
-    ESP_LOGI(tag, "connect; fields.num_uuids128 =%d", fields.num_uuids128);
-    for (i = 0; i < fields.num_uuids128; i++) {
-        if ((memcmp(&fields.uuids128[i], THRPT_UUID_DECLARE(THRPT_SVC),
-                    sizeof(ble_uuid128_t))) == 0 ) {
-            ESP_LOGI(tag, "blecent_should_connect 'THRPT' success");
-            return 1;
-        }
-    }
-    
-    */
-    
-
     char serv_name[] = "ULTRASONIC";
     if (fields.name != NULL) {
         ESP_LOGI(tag, "Device Name = %s", (char *)fields.name);
@@ -271,8 +259,10 @@ static void blecent_connect_if_interesting(const struct ble_gap_disc_desc *disc)
 static int blecent_subscribe_all(const struct peer *peer)
 {
     for(int i=0; i < BLECENT_MAX_SUBSCRIPTIONS; i++) {
-
+        break;
     }
+    //FIXME
+    return blecent_subscribe_uuid16(peer, 0x180D, 0x2A39);
 }
 
 static int blecent_subscribe_uuid16(const struct peer *peer, uint16_t svc_uuid, uint16_t chr_uuid)
@@ -349,7 +339,7 @@ void blecent_set_notify_cb(blecent_notify_fn *cb)
     notify_callback = cb;
 }
 
-void blecent_set_subscription_list(void)
+void blecent_set_subscription_list(struct blecent_subscription_t *subscription_list[BLECENT_MAX_SUBSCRIPTIONS])
 {
 
 }

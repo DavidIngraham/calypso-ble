@@ -21,10 +21,12 @@ extern "C" {
  */
 typedef void blecent_notify_fn(struct ble_gap_event *event);
 
-typedef struct 
-{
-    /* data */
-} blecent_subscription_list_t;
+/** @brief Struct for storing Generic Attribute Subscription parameters
+ */
+struct blecent_subscription_t {
+    ble_uuid_t* svc_uuid;
+    ble_uuid_t* attr_uuid;
+};
 
 
 /** @brief Set the callback for handling notifications (optional)
@@ -37,7 +39,7 @@ void blecent_set_notify_cb(blecent_notify_fn *cb);
  *
  * @param cb fucntion pointer to the desired callback
  */
-void blecent_set_subscription_list(blecent_subscription_list_t list);
+void blecent_set_subscription_list(struct blecent_subscription_t *list[BLECENT_MAX_SUBSCRIPTIONS]);
 
 /** @brief Configures and initiates GAP discovery scan
  */

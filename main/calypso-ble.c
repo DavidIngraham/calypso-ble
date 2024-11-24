@@ -22,19 +22,29 @@
 #include "gatt_peer.h"
 #include "blecent_gap.h"
 
-#define GATT_HR_UUID 0x180D
-#define GATT_HRCP_UUID 0x2A39
-
 #define DEVICE_NAME "ULTRASONIC"
 #define MANUFACTURER_NAME "CALYPSO"
 
 static const char *tag = "app_main";
 
+static const struct blecent_subscription_t hrcp = {
+    .svc_uuid = BLE_UUID16_DECLARE(0x180D),
+    .attr_uuid = BLE_UUID16_DECLARE(0x2A39)
+};
+
+static const struct blecent_subscription_t hrcp = {
+    .svc_uuid = BLE_UUID16_DECLARE(0x180D),
+    .attr_uuid = BLE_UUID16_DECLARE(0x2A39)
+};
+
+
+static const struct blecent_subscription_t list[BLECENT_MAX_SUBSCRIPTIONS] = {hrcp, };
+
 static SemaphoreHandle_t xSemaphore;
 void ble_store_config_init(void);
 
 /* Wind data will arrive as a ten byte notification */
-static void handle_wind_data(uint8_t wind_data[10])
+static void handle_wind_data_hrcp(uint8_t wind_data[10])
 {
     float wind_speed_ms = ((uint16_t)((wind_data[1] << 8) + wind_data[0]))/100.0f;
     uint16_t wind_direction_deg = (wind_data[3] << 8) + wind_data[2];
@@ -50,14 +60,20 @@ static void process_incoming_notification(struct ble_gap_event *event)
         ESP_LOGE(tag, "Invalid Notification Event");
         return;
     }
+    
+    const struct peer *rx_peer = peer_find(event->notify_rx.conn_handle);
+    const struct peer_chr *hrcp_chr = peer_chr_find_uuid(rx_peer, hrcp.svc_uuid, hrcp.attr_uuid);
+    const uint16_t hrcp_attr_handle = hrcp_chr->chr.def_handle + 1; //Why off by 1?
 
-    if (OS_MBUF_PKTLEN(event->notify_rx.om) == 10) {
+    ESP_LOGI(tag, "hrcp_chr handle= %d", hrcp_attr_handle);
+    if (event->notify_rx.attr_handle == hrcp_attr_handle && OS_MBUF_PKTLEN(event->notify_rx.om) == 10) {
       // Wind Update Received
         uint8_t wind_data[10];
         memcpy(wind_data, event->notify_rx.om->om_data, OS_MBUF_PKTLEN(event->notify_rx.om));
-        handle_wind_data(wind_data);
+        handle_wind_data_hrcp(wind_data);
     }else{
         ESP_LOGI(tag, "ESP_GATTC_NOTIFY_EVT, unexpected value received (length!=10)");
+        
     }
 }
 
